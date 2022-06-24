@@ -11,7 +11,7 @@ minikube start --kubernetes-version=v1.24.2
 ```
 helm repo add apache-airflow https://airflow.apache.org
 
-helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f .\src\airflow\override-git.yaml
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f .\src\airflow\yaml\override-git.yaml
 
 ```
 
@@ -37,7 +37,7 @@ minikube start --kubernetes-version=v1.24.2 --mount-string=$PWD\src:/mnt --mount
 ```
 helm repo add apache-airflow https://airflow.apache.org
 
-helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f .\src\airflow\override-local.yaml
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f .\src\airflow\yaml\override-local.yaml
 ```
 
 ```
