@@ -5,17 +5,18 @@
 2. Airflow. Installing the Chart 
 
 `helm repo add apache-airflow https://airflow.apache.org`
+
 `helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace -f .\src\airflow\override.yaml`
 
 Airflow Webserver: `kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow`
 
 Default Webserver (Airflow UI) Login credentials:
 
-    | username: | `admin` |
-    | password: | `admin` |
+    username: admin
+    password: admin
 
 Default Postgres connection credentials:
 
-    | username: | `postgres` |
-    | password: | `postgres` |
-    | port:     | `5432`     |
+    username: postgres
+    password: postgres
+    port:     5432
