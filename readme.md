@@ -22,7 +22,7 @@ kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
 ```
 
 
-# For develop
+# For develop and debug
 
 You can edit the code locally
 
