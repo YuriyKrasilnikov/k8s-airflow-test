@@ -1,0 +1,38 @@
+##
+## Build
+##
+FROM golang:1.18-alpine AS build
+
+ARG src=./src/golang/FileUploader
+
+WORKDIR /src
+
+COPY ${src} ./
+
+RUN go mod download
+
+RUN go build -o /app/file-uploader-server
+
+##
+## Deploy
+##
+FROM alpine:latest
+
+ARG arg_frontend=static
+ARG arg_form_input_name=file
+ARG arg_directory=data
+
+ENV frontend=${arg_frontend}
+ENV form_input_name=${arg_form_input_name}
+ENV directory=${arg_directory}
+
+WORKDIR /app
+
+COPY --from=build /app/file-uploader-server ./file-uploader-server
+COPY --from=build /src/${arg_frontend}/* ./${arg_frontend}/
+
+RUN mkdir -p ./${arg_directory}
+
+EXPOSE 8080
+
+CMD ./file-uploader-server --frontend ${frontend} --form-input-name ${form_input_name} --directory ${directory}

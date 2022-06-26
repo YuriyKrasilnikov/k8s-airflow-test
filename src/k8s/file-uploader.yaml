@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: file-uploader
+  labels:
+    app: file-uploader
+spec:
+  selector:
+    matchLabels:
+      app: file-uploader
+  template:
+    metadata:
+      labels:
+        app: file-uploader
+    spec:
+      containers:
+      - name: file-uploader
+        image: file-uploader
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+          name: web
+        volumeMounts:
+        - name: models
+          mountPath: /app/data/
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: pvc-models
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: file-uploader
+  labels:
+    app: file-uploader
+spec:
+  selector:
+    app: file-uploader
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
