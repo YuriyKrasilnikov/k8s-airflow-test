@@ -1,3 +1,7 @@
+config:
+  api:
+    auth_backends: airflow.api.auth.backend.basic_auth
+
 # Git sync
 dags:
   gitSync:

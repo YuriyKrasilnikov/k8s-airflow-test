@@ -36,6 +36,8 @@ def test(input_model, input_test, output_test):
     X_test = pd.read_parquet(input_test)
     y_test = pd.read_parquet(output_test)
 
+    logging.debug(X_test.iloc[0])
+
     with open(input_model, 'rb') as f:
       model = pickle.load(f)
 

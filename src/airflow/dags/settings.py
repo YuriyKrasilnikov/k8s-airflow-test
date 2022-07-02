@@ -36,3 +36,4 @@ MODEL = _add_path(MODEL_FILENAME)
 DROP_COLUMNS = ["Name"]
 CATEGORATE_COLUMNS = ["Sex"]
 
+FILE_CONN_HTTP = 'http://file-uploader.default.svc.cluster.local:8080/upload'

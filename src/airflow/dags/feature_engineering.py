@@ -6,23 +6,12 @@ import pickle
 
 import pandas as pd
 
-from airflow.models import DAG
 from airflow.decorators import task
+from airflow.utils.task_group import TaskGroup
 
 ### install packages ###
 from utils import *
 packages_installed(["sklearn"])
-
-### import settings ###
-from settings import *
-
-args = {
-    'owner': 'airflow',
-    'start_date': dt.datetime(2022, 6, 25),
-    'retries': 1,
-    'retry_delay': dt.timedelta(minutes=1),
-    'depends_on_past': False,
-}
 
 ### Task ###
 
@@ -91,26 +80,33 @@ def feature_engineering_fit(input_train, output_model, catg_colunms, drop_column
 
 ### Dags ###
 
-with DAG(dag_id='titanic_feature_engineering', default_args=args, schedule_interval=None) as dag:
-
-    create_titanic_task = download_dataset(
-        url=URL,
-        output_file=FILE
+def feature_engineering(name, task_arg):
+    group = TaskGroup(
+        group_id=name,
     )
 
-    split_titanic_task = split_dataset(
-        file            = FILE,
-        input_train     = INPUT_TRAIN,
-        input_test      = INPUT_TEST,
-        output_train    = OUTPUT_TRAIN,
-        output_test     = OUTPUT_TEST
-    )
+    with group:
 
-    feature_engineering_fit_task = feature_engineering_fit(
-        input_train=INPUT_TRAIN,
-        output_model=FEATURE_MODEL,
-        catg_colunms=CATEGORATE_COLUMNS,
-        drop_columns= DROP_COLUMNS
-    )
+        create_titanic_task = download_dataset(
+            url         = task_arg.URL,
+            output_file = task_arg.FILE
+        )
 
-    create_titanic_task >> split_titanic_task >> feature_engineering_fit_task
+        split_titanic_task = split_dataset(
+            file            = task_arg.FILE,
+            input_train     = task_arg.INPUT_TRAIN,
+            input_test      = task_arg.INPUT_TEST,
+            output_train    = task_arg.OUTPUT_TRAIN,
+            output_test     = task_arg.OUTPUT_TEST
+        )
+
+        feature_engineering_fit_task = feature_engineering_fit(
+            input_train     = task_arg.INPUT_TRAIN,
+            output_model    = task_arg.FEATURE_MODEL,
+            catg_colunms    = task_arg.CATEGORATE_COLUMNS,
+            drop_columns    = task_arg.DROP_COLUMNS
+        )
+
+        create_titanic_task >> split_titanic_task >> feature_engineering_fit_task
+
+    return group

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="/predict"
+      method="post"
+    > 
+      <fieldset>
+        <legend>Predict</legend>
+        <label for="Pclass">Pclass</label><br>
+        <input type="number" id="Pclass" name="pclass" value="1"/><br>
+
+        <label for="Name">Name</label><br>
+        <input type="text" id="Name" name="name" value="Mr. Adolphe Saalfeld"/><br>
+
+        <fieldset>
+          <legend>Sex</legend>
+          <input type="radio" id="sex_male" name="sex" value="male" checked>
+          <label for="sex_male">Male</label><br>
+          <input type="radio" id="sex_female" name="sex" value="female">
+          <label for="sex_female">Female</label><br>
+        </fieldset>
+
+        <label for="Age">Age</label><br>
+        <input type="number" id="Age" name="age" step="0.1" value="47.0"/><br>
+
+        <label for="SSAboard">Siblings/Spouses Aboard</label><br>
+        <input type="number" id="SSAboard" name="ssaboard" value="0"/><br>
+
+        <label for="PCAboard">Parents/Children Aboard</label><br>
+        <input type="number" id="PCAboard" name="pcaboard" value="0"/><br>
+
+        <label for="Fare">Fare</label><br>
+        <input type="number" id="Fare" name="fare" step="0.1" value="30.5"/><br>
+        <br>
+        <input type="submit" value="Submit" />
+      </fieldset>
+    </form>
+    <br>
+    <br>
+    <form
+      action="/retrain"
+      method="post"
+    > 
+      <fieldset>
+        <legend>Retrain Model</legend>
+        <input type="submit" value="Retrain" />
+      </fieldset> 
+    </form>
+  </body>
+
+</html>

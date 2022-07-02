@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: webserver
+  labels:
+    app: webserver
+spec:
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - name: webserver
+        image: webserver
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+          name: web
+        volumeMounts:
+        - name: models
+          mountPath: /app/data/
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: pvc-models
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: webserver
+  labels:
+    app: webserver
+spec:
+  selector:
+    app: webserver
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000

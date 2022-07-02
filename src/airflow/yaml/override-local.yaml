@@ -1,6 +1,8 @@
 config:
   logging:
     logging_level: DEBUG
+  api:
+    auth_backends: airflow.api.auth.backend.basic_auth
 
 # Persistence sync
 dags:
