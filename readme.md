@@ -21,7 +21,12 @@ You can edit the code locally
 minikube start --kubernetes-version=v1.24.2 --mount-string=${PWD}\src:/mnt --mount
 ```
 
-2. Start script
+2. Start install script
 ```
 script\debug\install-debug.cmd
+```
+
+3. View webserver on localhost:80
+```
+kubectl port-forward svc/webserver 80:8000
 ```
