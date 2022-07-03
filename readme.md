@@ -1,6 +1,7 @@
 # For test
 
 0. Install minikube (Windows) v1.26.0 and Helm
+
 [doc] https://minikube.sigs.k8s.io/docs/start/
 
 [file] https://github.com/kubernetes/minikube/releases/download/v1.26.0/minikube-windows-amd64.exe
@@ -30,6 +31,7 @@ kubectl port-forward svc/webserver 80:8000
 You can edit the code locally
 
 1. Install minikube (Windows) v1.26.0 and Helm
+
 [doc] https://minikube.sigs.k8s.io/docs/start/
 
 [file] https://github.com/kubernetes/minikube/releases/download/v1.26.0/minikube-windows-amd64.exe
