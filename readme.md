@@ -2,7 +2,9 @@
 
 0. Install minikube (Windows) v1.26.0 and Helm
 [doc] https://minikube.sigs.k8s.io/docs/start/
+
 [file] https://github.com/kubernetes/minikube/releases/download/v1.26.0/minikube-windows-amd64.exe
+
 [file] https://get.helm.sh/helm-canary-windows-amd64.zip
 
 1. Start minikube (Windows) v1.26.0
@@ -29,7 +31,9 @@ You can edit the code locally
 
 1. Install minikube (Windows) v1.26.0 and Helm
 [doc] https://minikube.sigs.k8s.io/docs/start/
+
 [file] https://github.com/kubernetes/minikube/releases/download/v1.26.0/minikube-windows-amd64.exe
+
 [file] https://get.helm.sh/helm-canary-windows-amd64.zip
 
 2. git clone https://github.com/YuriyKrasilnikov/k8s-airflow-test.git
